@@ -6,6 +6,8 @@
       ./hardware-configuration.nix
     ];
 
+  nixpkgs.config.allowUnfree = true;
+
   nix.settings.allowed-users = [ "@wheel" ];
 
   boot.loader.systemd-boot.enable = true;
@@ -20,7 +22,6 @@
   i18n.defaultLocale = "en_US.UTF-8";
   console = {
     font = "Lat2-Terminus16";
-    keyMap = "us";
     useXkbConfig = true; # use xkbOptions in tty.
   };
 
@@ -50,8 +51,9 @@
     };
     displayManager = {
       defaultSession = "none+i3";
-      startx.enable = true;
-      setupCommands = "${pkgs.xorg.xrandr}/bin/xrandr --rate 144.00";
+      lightdm = {
+        enable = true;
+      };
     };
     windowManager.i3.package = pkgs.i3-gaps;
     windowManager.i3 = {
@@ -77,11 +79,17 @@
   };
 
   environment.systemPackages = with pkgs; [
+    steam
     vim
     emacs
     wget
     git
   ];
+
+  programs.steam = {
+    enable = true;
+    dedicatedServer.openFirewall = true;
+  };
 
   system.stateVersion = "23.05";
 }

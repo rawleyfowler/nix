@@ -182,4 +182,7 @@ bar {
         status_command i3blocks
 }
 
+default_border pixel 1
+default_floating_border pixel 0
+
 exec xrandr --rate 144.00

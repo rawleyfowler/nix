@@ -1,7 +1,9 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ./alacritty.nix ];
+  imports =
+    [ ./alacritty.nix
+    ];
   home.username = "rf";
   home.homeDirectory = "/home/rf";
 
@@ -9,19 +11,20 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  home.packages = with pkgs; [
-    lutris
-    hermit
-    xclip
-    neofetch
-    discord
-    scrot
-    steam
-    dejavu_fonts
-    ipafont
-    (pkgs.nerdfonts.override { fonts = [ "Hermit" ]; })
-    alacritty
-  ];
+  home.packages = with pkgs;
+    [ lutris
+      hermit
+      xclip
+      neofetch
+      discord
+      scrot
+      dejavu_fonts
+      ipafont
+      (pkgs.nerdfonts.override { fonts = [ "Hermit" ]; })
+      alacritty
+      wine
+      winetricks
+    ];
 
   home.file = {
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
